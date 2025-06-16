@@ -41,8 +41,21 @@ export class MemStorage implements IStorage {
   async createRegistration(insertRegistration: InsertRegistration): Promise<Registration> {
     const id = this.currentRegistrationId++;
     const registration: Registration = {
-      ...insertRegistration,
       id,
+      firstName: insertRegistration.firstName,
+      lastName: insertRegistration.lastName,
+      email: insertRegistration.email,
+      distance: insertRegistration.distance,
+      country: insertRegistration.country || "Россия",
+      city: insertRegistration.city,
+      address: insertRegistration.address,
+      phone: insertRegistration.phone,
+      emergencyPhone: insertRegistration.emergencyPhone || null,
+      club: insertRegistration.club || null,
+      isNotInClub: insertRegistration.isNotInClub || "false",
+      profession: insertRegistration.profession || null,
+      medicalCertificate: insertRegistration.medicalCertificate || "false",
+      termsAgreement: insertRegistration.termsAgreement || "false",
       createdAt: new Date(),
     };
     this.registrations.set(id, registration);

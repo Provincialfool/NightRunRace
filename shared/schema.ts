@@ -1,12 +1,35 @@
-import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, timestamp, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const registrations = pgTable("registrations", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull(),
+  // Personal info
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
   email: text("email").notNull(),
   distance: text("distance").notNull(),
+  
+  // Location
+  country: text("country").notNull().default("Россия"),
+  city: text("city").notNull(),
+  address: text("address").notNull(),
+  
+  // Contacts
+  phone: text("phone").notNull(),
+  emergencyPhone: text("emergency_phone"),
+  
+  // Additional info
+  club: text("club"),
+  isNotInClub: text("is_not_in_club").default("false"),
+  profession: text("profession"),
+  
+  // Medical
+  medicalCertificate: text("medical_certificate").default("false"),
+  
+  // Agreements
+  termsAgreement: text("terms_agreement").default("false"),
+  
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
