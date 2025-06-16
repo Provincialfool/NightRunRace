@@ -61,6 +61,14 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        // Space theme colors
+        "space-navy": "var(--space-navy)",
+        "space-purple": "var(--space-purple)",
+        "cosmic-purple": "var(--cosmic-purple)",
+        "cosmic-pink": "var(--cosmic-pink)",
+        "cosmic-cyan": "var(--cosmic-cyan)",
+        "cosmic-blue": "var(--cosmic-blue)",
+        "cosmic-orange": "var(--cosmic-orange)",
       },
       keyframes: {
         "accordion-down": {

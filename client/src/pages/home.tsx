@@ -27,11 +27,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-space-navy text-white overflow-x-hidden">
+    <div className="min-h-screen text-white overflow-x-hidden" style={{ backgroundColor: 'var(--space-navy)' }}>
       <AnimatedBackground />
       
       {/* Header */}
-      <header className="relative z-20 py-4 px-6 cosmic-bg">
+      <header className="relative z-20 py-4 px-6" style={{ background: 'linear-gradient(135deg, hsl(240, 55%, 9%) 0%, hsl(249, 57%, 20%) 50%, hsl(258, 52%, 28%) 100%)' }}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <img src={logoImg} alt="Ночной забег Королёв" className="h-12 w-auto" />
@@ -42,19 +42,19 @@ export default function Home() {
           <nav className="hidden md:flex space-x-8">
             <a 
               href="#registration" 
-              className="text-white hover:text-cosmic-cyan transition-colors duration-300 font-medium"
+              className="text-white hover:text-cyan-400 transition-colors duration-300 font-medium"
             >
               Регистрация
             </a>
             <a 
               href="#program" 
-              className="text-white hover:text-cosmic-cyan transition-colors duration-300 font-medium"
+              className="text-white hover:text-cyan-400 transition-colors duration-300 font-medium"
             >
               Программа
             </a>
             <a 
               href="#partners" 
-              className="text-white hover:text-cosmic-cyan transition-colors duration-300 font-medium"
+              className="text-white hover:text-cyan-400 transition-colors duration-300 font-medium"
             >
               Партнёры
             </a>
@@ -73,7 +73,7 @@ export default function Home() {
       <PartnersSection />
 
       {/* Footer */}
-      <footer className="py-12 bg-space-navy border-t border-white/10">
+      <footer className="py-12 border-t border-white/10" style={{ backgroundColor: 'var(--space-navy)' }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
