@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
-import partnersImg from "@assets/partners_1750094435562.png";
+import gubernatorLogo from "@assets/Gubernator.png";
+import mosoblsportLogo from "@assets/MOSOBLSPORT.png";
+import korolevLogo from "@assets/KOROLEV.png";
 
 const partners = [
-  { name: "Команда Губернатора", logo: partnersImg, key: "gubernator" },
-  { name: "Мособл спорт", logo: partnersImg, key: "mosoblsport" },
-  { name: "Администрация г.о. Королёв", logo: partnersImg, key: "korolev" },
+  { name: "Команда Губернатора", logo: gubernatorLogo, key: "gubernator" },
+  { name: "Мособл спорт", logo: mosoblsportLogo, key: "mosoblsport" },
+  { name: "Администрация г.о. Королёв", logo: korolevLogo, key: "korolev" },
 ];
 
 export default function PartnersSection() {

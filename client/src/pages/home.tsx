@@ -53,12 +53,7 @@ export default function Home() {
             >
               Программа
             </a>
-            <a 
-              href="#gallery" 
-              className="text-white hover:text-cyan-400 transition-colors duration-300 font-medium"
-            >
-              Фото
-            </a>
+
             <a 
               href="#partners" 
               className="text-white hover:text-cyan-400 transition-colors duration-300 font-medium"
@@ -77,7 +72,6 @@ export default function Home() {
       <HeroSection />
       <NewRegistrationSection />
       <ProgramSection />
-      <PhotoGallerySection />
       <PartnersSection />
 
       {/* Footer */}
@@ -100,6 +94,12 @@ export default function Home() {
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-gray-400">
             <p>&copy; 2025 Ночной забег Королёв. Все права защищены.</p>
+            <a 
+              href="/admin" 
+              className="text-xs text-gray-600 hover:text-gray-400 transition-colors duration-300 mt-2 inline-block"
+            >
+              Администрирование
+            </a>
           </div>
         </div>
       </footer>
