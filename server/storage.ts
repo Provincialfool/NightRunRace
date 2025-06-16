@@ -1,4 +1,6 @@
 import { users, registrations, type User, type InsertUser, type Registration, type InsertRegistration } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -8,63 +10,36 @@ export interface IStorage {
   getRegistrations(): Promise<Registration[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private registrations: Map<number, Registration>;
-  private currentUserId: number;
-  private currentRegistrationId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.registrations = new Map();
-    this.currentUserId = 1;
-    this.currentRegistrationId = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async createRegistration(insertRegistration: InsertRegistration): Promise<Registration> {
-    const id = this.currentRegistrationId++;
-    const registration: Registration = {
-      id,
-      firstName: insertRegistration.firstName,
-      lastName: insertRegistration.lastName,
-      email: insertRegistration.email,
-      distance: insertRegistration.distance,
-      country: insertRegistration.country || "Россия",
-      city: insertRegistration.city,
-      address: insertRegistration.address,
-      phone: insertRegistration.phone,
-      emergencyPhone: insertRegistration.emergencyPhone || null,
-      club: insertRegistration.club || null,
-      isNotInClub: insertRegistration.isNotInClub || "false",
-      profession: insertRegistration.profession || null,
-      medicalCertificate: insertRegistration.medicalCertificate || "false",
-      termsAgreement: insertRegistration.termsAgreement || "false",
-      createdAt: new Date(),
-    };
-    this.registrations.set(id, registration);
+    const [registration] = await db
+      .insert(registrations)
+      .values(insertRegistration)
+      .returning();
     return registration;
   }
 
   async getRegistrations(): Promise<Registration[]> {
-    return Array.from(this.registrations.values());
+    return await db.select().from(registrations);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
