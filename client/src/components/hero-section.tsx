@@ -227,11 +227,9 @@ export default function HeroSection() {
           
           {/* Massive Rocket Exhaust Trail Going Down */}
           <motion.div
-            className="absolute top-full left-1/2 transform -translate-x-1/2 z-10"
+            className="absolute top-full left-1/2 transform -translate-x-1/2 z-5"
             animate={{
               opacity: [0.8, 1, 0.8],
-              scaleY: [1.2, 1.8, 1.2],
-              scaleX: [1, 1.3, 1],
               y: [0, 15, 0],
             }}
             transition={{
@@ -241,14 +239,13 @@ export default function HeroSection() {
             }}
           >
             <div className="relative">
-              {/* Main exhaust trail - much bigger than rocket */}
+              {/* Main exhaust trail - much bigger than rocket, positioned under it */}
               <motion.img 
                 src={sparksImg} 
                 alt="Exhaust" 
                 className="w-80 h-96 md:w-96 md:h-[32rem]"
                 style={{ 
                   filter: 'drop-shadow(0 0 25px rgba(255, 100, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 0, 150, 0.6))',
-                  transform: 'rotate(180deg)'
                 }}
                 animate={{
                   filter: [
@@ -273,7 +270,6 @@ export default function HeroSection() {
                 }}
                 animate={{
                   opacity: [0.6, 1, 0.6],
-                  scaleY: [1, 1.4, 1],
                 }}
                 transition={{
                   duration: 2,
