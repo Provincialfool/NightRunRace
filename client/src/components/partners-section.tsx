@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import partnersImg from "@assets/partners_1750094435562.png";
 
 const partners = [
-  { name: "Команда Губернатора", logo: partnersImg },
-  { name: "Мособл спорт", logo: partnersImg },
-  { name: "Администрация г.о. Королёв", logo: partnersImg },
+  { name: "Команда Губернатора", logo: partnersImg, key: "gubernator" },
+  { name: "Мособл спорт", logo: partnersImg, key: "mosoblsport" },
+  { name: "Администрация г.о. Королёв", logo: partnersImg, key: "korolev" },
 ];
 
 export default function PartnersSection() {
   return (
-    <section id="partners" className="py-20 cosmic-bg">
+    <section id="partners" className="py-20" style={{ background: 'linear-gradient(135deg, hsl(240, 55%, 9%) 0%, hsl(249, 57%, 20%) 50%, hsl(258, 52%, 28%) 100%)' }}>
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           className="text-center mb-16"

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import AnimatedBackground from "@/components/animated-background";
 import HeroSection from "@/components/hero-section";
-import RegistrationSection from "@/components/registration-section";
+import NewRegistrationSection from "@/components/new-registration-section";
+import PhotoGallerySection from "@/components/photo-gallery-section";
 import ProgramSection from "@/components/program-section";
 import PartnersSection from "@/components/partners-section";
 import logoImg from "@assets/logo_1750094435561.png";
@@ -53,6 +54,12 @@ export default function Home() {
               Программа
             </a>
             <a 
+              href="#gallery" 
+              className="text-white hover:text-cyan-400 transition-colors duration-300 font-medium"
+            >
+              Фото
+            </a>
+            <a 
               href="#partners" 
               className="text-white hover:text-cyan-400 transition-colors duration-300 font-medium"
             >
@@ -68,14 +75,15 @@ export default function Home() {
       </header>
 
       <HeroSection />
-      <RegistrationSection />
+      <NewRegistrationSection />
       <ProgramSection />
+      <PhotoGallerySection />
       <PartnersSection />
 
       {/* Footer */}
       <footer className="py-12 border-t border-white/10" style={{ backgroundColor: 'var(--space-navy)' }}>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
             <div>
               <h3 className="text-xl font-bold gradient-text mb-4">Ночной забег Королёв</h3>
               <p className="text-gray-400">
@@ -89,7 +97,6 @@ export default function Home() {
                 <p>Адрес: г. Королёв, Московская область</p>
               </div>
             </div>
-
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-gray-400">
             <p>&copy; 2025 Ночной забег Королёв. Все права защищены.</p>

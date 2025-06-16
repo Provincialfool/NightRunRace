@@ -113,10 +113,17 @@ This is a full-stack web application for the "Ночной Забег Корол
 - **Start Command**: `npm run start`
 - **Environment Variables**: `DATABASE_URL` for database connection
 
-## Changelog
+## Recent Changes
 
-Changelog:
-- June 16, 2025. Initial setup
+Recent Changes:
+- June 16, 2025: Initial setup with basic registration system
+- June 16, 2025: Comprehensive redesign with new registration flow:
+  - Two-step registration: distance selection tiles (5km/10km) with availability counters
+  - Full participant form with personal info, location, contacts, club membership, medical certificate
+  - Photo gallery placeholder section for post-event content
+  - Updated contact email to korolev@night-run.ru
+  - Removed social media sections and phone contact
+  - Enhanced space-themed visual design
 
 ## User Preferences
 

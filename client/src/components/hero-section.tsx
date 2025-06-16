@@ -7,11 +7,11 @@ export default function HeroSection() {
     <section className="relative min-h-screen hero-bg flex items-center justify-center overflow-hidden">
       {/* Animated Rocket */}
       <motion.div
-        className="absolute right-[10%] top-[20%] z-10 md:scale-100 scale-75"
+        className="absolute right-[5%] top-[15%] z-10"
         animate={{
-          y: [-20, 10, -20],
-          rotate: [-15, -10, -15],
-          opacity: [0.8, 1, 0.8],
+          y: [-30, 15, -30],
+          rotate: [-12, -8, -12],
+          opacity: [0.9, 1, 0.9],
         }}
         transition={{
           duration: 5,
@@ -19,7 +19,7 @@ export default function HeroSection() {
           ease: "easeInOut",
         }}
       >
-        <img src={rocketImg} alt="Rocket" className="w-24 h-32" />
+        <img src={rocketImg} alt="Rocket" className="w-32 h-40 md:w-40 md:h-48 drop-shadow-2xl" />
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
