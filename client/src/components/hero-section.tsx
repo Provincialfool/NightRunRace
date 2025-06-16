@@ -190,7 +190,7 @@ export default function HeroSection() {
       </motion.div>
       {/* Large Animated Rocket with Massive Exhaust Trail */}
       <motion.div
-        className="absolute right-[5%] top-[10%] z-10"
+        className="absolute right-[25%] top-[20%] z-10 xl:right-[30%] xl:top-[15%]"
         animate={{
           y: [-30, 25, -30],
           x: [-8, 8, -8],
@@ -225,7 +225,7 @@ export default function HeroSection() {
             }}
           />
           
-          {/* Massive Rocket Exhaust Trail Going Down */}
+          {/* Rocket Exhaust Trail Under Nozzle */}
           <motion.div
             className="absolute top-full left-1/2 transform -translate-x-1/2 z-5"
             animate={{
@@ -238,47 +238,20 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           >
-            <div className="relative">
-              {/* Main exhaust trail - much bigger than rocket, positioned under it */}
-              <motion.img 
-                src={sparksImg} 
-                alt="Exhaust" 
-                className="w-80 h-96 md:w-96 md:h-[32rem]"
-                style={{ 
-                  filter: 'drop-shadow(0 0 25px rgba(255, 100, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 0, 150, 0.6))',
-                }}
-                animate={{
-                  filter: [
-                    'drop-shadow(0 0 25px rgba(255, 100, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 0, 150, 0.6))',
-                    'drop-shadow(0 0 35px rgba(255, 0, 150, 1)) drop-shadow(0 0 60px rgba(255, 100, 0, 0.8))',
-                    'drop-shadow(0 0 25px rgba(255, 100, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 0, 150, 0.6))',
-                  ]
-                }}
-                transition={{
-                  duration: 1.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              
-              {/* Additional exhaust layers for more intense effect */}
-              <motion.div
-                className="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-80 md:w-80 md:h-96"
-                style={{
-                  background: 'linear-gradient(to bottom, rgba(255, 100, 0, 0.4) 0%, rgba(255, 0, 150, 0.3) 50%, rgba(0, 0, 0, 0) 100%)',
-                  filter: 'blur(8px)',
-                }}
-                animate={{
-                  opacity: [0.6, 1, 0.6],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.3,
-                }}
-              />
-            </div>
+            {/* Main exhaust trail positioned directly under rocket nozzle */}
+            <motion.img 
+              src={sparksImg} 
+              alt="Exhaust" 
+              className="w-80 h-96 md:w-96 md:h-[32rem]"
+              animate={{
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{
+                duration: 1.8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
           </motion.div>
         </div>
       </motion.div>
@@ -330,14 +303,14 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Date Badge */}
+        {/* Date Badge - Large and Above All Elements */}
         <motion.div
-          className="inline-block mb-8"
+          className="inline-block mb-8 relative z-50"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <img src={dateBadge} alt="28.06.2025" className="h-16 w-auto mx-auto" />
+          <img src={dateBadge} alt="28.06.2025" className="h-24 w-auto mx-auto md:h-32" />
         </motion.div>
 
         <motion.p
