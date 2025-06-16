@@ -7,7 +7,7 @@ import logoBig from "@assets/logo-big.png";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen hero-bg flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen hero-bg flex items-center justify-center overflow-hidden pt-20">
       {/* Scattered Animated Stars for Night Effect */}
       {/* Top area stars */}
       <motion.div

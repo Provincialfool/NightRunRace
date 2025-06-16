@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AnimatedBackground from "@/components/animated-background";
 import HeroSection from "@/components/hero-section";
 import NewRegistrationSection from "@/components/new-registration-section";
@@ -9,6 +9,9 @@ import logoImg from "@assets/logo_1750094435561.png";
 import partnersImg from "@assets/partners_1750094435562.png";
 
 export default function Home() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     // Smooth scroll for navigation links
     const handleSmoothScroll = (e: Event) => {
@@ -23,21 +26,44 @@ export default function Home() {
       }
     };
 
+    // Handle scroll for floating header
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 100);
+    };
+
     document.addEventListener('click', handleSmoothScroll);
-    return () => document.removeEventListener('click', handleSmoothScroll);
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      document.removeEventListener('click', handleSmoothScroll);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden" style={{ backgroundColor: 'var(--space-navy)' }}>
       <AnimatedBackground />
       
-      {/* Header */}
-      <header className="relative z-20 py-4 px-6" style={{ background: 'linear-gradient(135deg, hsl(240, 55%, 9%) 0%, hsl(249, 57%, 20%) 50%, hsl(258, 52%, 28%) 100%)' }}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      {/* Floating Header */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'py-2 floating-header-compact' 
+          : 'py-4 floating-header'
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <img src={logoImg} alt="Ночной забег Королёв" className="h-12 w-auto" />
+            <img 
+              src={logoImg} 
+              alt="Ночной забег Королёв" 
+              className={`w-auto transition-all duration-300 ${isScrolled ? 'h-8' : 'h-12'}`} 
+            />
             <div className="hidden md:flex items-center space-x-2">
-              <img src={partnersImg} alt="Партнёры" className="h-8 w-auto opacity-80" />
+              <img 
+                src={partnersImg} 
+                alt="Партнёры" 
+                className={`w-auto opacity-80 transition-all duration-300 ${isScrolled ? 'h-6' : 'h-8'}`} 
+              />
             </div>
           </div>
           <nav className="hidden md:flex space-x-8">
@@ -53,7 +79,6 @@ export default function Home() {
             >
               Программа
             </a>
-
             <a 
               href="#partners" 
               className="text-white hover:text-cyan-400 transition-colors duration-300 font-medium"
@@ -68,6 +93,8 @@ export default function Home() {
           </button>
         </div>
       </header>
+
+
 
       <HeroSection />
       <NewRegistrationSection />
