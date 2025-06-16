@@ -124,6 +124,12 @@ Recent Changes:
   - Updated contact email to korolev@night-run.ru
   - Removed social media sections and phone contact
   - Enhanced space-themed visual design
+- June 16, 2025: Fixed JavaScript errors and implemented floating header:
+  - Fixed `gradients is not defined` error in ProgramSection component
+  - Implemented floating header with blur effects and smooth animations
+  - Added responsive mobile menu with hamburger toggle
+  - Enhanced CSS with floating header styles and backdrop blur effects
+  - Improved navigation UX with scroll-based header transformations
 
 ## User Preferences
 
