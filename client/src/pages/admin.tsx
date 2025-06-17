@@ -31,8 +31,29 @@ export default function AdminPage() {
   const [programItems, setProgramItems] = useState(initialProgramItems);
   const [newItem, setNewItem] = useState({ time: "", title: "", isHighlight: false });
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editingRegistration, setEditingRegistration] = useState<any>(null);
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoCaption, setPhotoCaption] = useState("");
+  const [documentFile, setDocumentFile] = useState<File | null>(null);
+  const [documentType, setDocumentType] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  // Check authentication on component mount
+  const { data: authStatus, isLoading: authLoading } = useQuery({
+    queryKey: ["/api/auth/check"],
+    queryFn: async () => {
+      const response = await apiRequest("GET", "/api/auth/check");
+      return response.json();
+    },
+  });
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!authLoading && authStatus && !authStatus.authenticated) {
+      window.location.href = "/login";
+    }
+  }, [authStatus, authLoading]);
 
   // Fetch registrations
   const { data: registrations = [], isLoading } = useQuery({
@@ -96,6 +117,107 @@ export default function AdminPage() {
     });
   };
 
+  // Fetch photos and documents
+  const { data: photos = [] } = useQuery({
+    queryKey: ["/api/photos"],
+    queryFn: async () => {
+      const response = await apiRequest("GET", "/api/photos");
+      return response.json();
+    },
+  });
+
+  const { data: documents = [] } = useQuery({
+    queryKey: ["/api/documents"],
+    queryFn: async () => {
+      const response = await apiRequest("GET", "/api/documents");
+      return response.json();
+    },
+  });
+
+  // Photo upload mutation
+  const uploadPhotoMutation = useMutation({
+    mutationFn: async () => {
+      if (!photoFile) throw new Error("No file selected");
+      const formData = new FormData();
+      formData.append('photo', photoFile);
+      formData.append('caption', photoCaption);
+      const response = await fetch('/api/photos', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!response.ok) throw new Error('Upload failed');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/photos"] });
+      setPhotoFile(null);
+      setPhotoCaption("");
+      toast({ title: "Фото загружено", description: "Фотография успешно добавлена" });
+    },
+    onError: () => {
+      toast({ title: "Ошибка", description: "Не удалось загрузить фото", variant: "destructive" });
+    },
+  });
+
+  // Document upload mutation
+  const uploadDocumentMutation = useMutation({
+    mutationFn: async () => {
+      if (!documentFile || !documentType) throw new Error("File and type required");
+      const formData = new FormData();
+      formData.append('document', documentFile);
+      formData.append('type', documentType);
+      const response = await fetch('/api/documents', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!response.ok) throw new Error('Upload failed');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/documents"] });
+      setDocumentFile(null);
+      setDocumentType("");
+      toast({ title: "Документ загружен", description: "Документ успешно добавлен" });
+    },
+    onError: () => {
+      toast({ title: "Ошибка", description: "Не удалось загрузить документ", variant: "destructive" });
+    },
+  });
+
+  // Registration mutations
+  const updateRegistrationMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: number, data: any }) => {
+      const response = await apiRequest("PUT", `/api/registrations/${id}`, data);
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/registrations"] });
+      setEditingRegistration(null);
+      toast({ title: "Участник обновлен", description: "Данные участника сохранены" });
+    },
+  });
+
+  const deleteRegistrationMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const response = await apiRequest("DELETE", `/api/registrations/${id}`);
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/registrations"] });
+      toast({ title: "Участник удален", description: "Регистрация удалена" });
+    },
+  });
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest("POST", "/api/logout");
+      return response.json();
+    },
+    onSuccess: () => {
+      window.location.href = "/login";
+    },
+  });
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--space-navy)' }}>
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -105,12 +227,31 @@ export default function AdminPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl font-bold gradient-text mb-4">Панель администратора</h1>
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-4xl font-bold gradient-text">Панель администратора</h1>
+            <div className="flex gap-4 items-center">
+              <span className="text-white/70">Добро пожаловать, {authStatus?.username}</span>
+              <Button 
+                variant="outline" 
+                onClick={() => logoutMutation.mutate()}
+                className="text-white border-white/30 hover:bg-white/10 hover:text-white bg-transparent"
+              >
+                Выйти
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={() => window.location.href = '/'}
+                className="text-white border-white/30 hover:bg-white/10 hover:text-white bg-transparent"
+              >
+                На главную
+              </Button>
+            </div>
+          </div>
           <p className="text-gray-300">Управление регистрациями и контентом Ночного забега Королёв</p>
         </motion.div>
 
         <Tabs defaultValue="registrations" className="space-y-8">
-          <TabsList className="grid w-full grid-cols-3 bg-white/10 border-white/20">
+          <TabsList className="grid w-full grid-cols-4 bg-white/10 border-white/20">
             <TabsTrigger value="registrations" className="text-white data-[state=active]:bg-white/20">
               Регистрации
             </TabsTrigger>
@@ -119,6 +260,9 @@ export default function AdminPage() {
             </TabsTrigger>
             <TabsTrigger value="photos" className="text-white data-[state=active]:bg-white/20">
               Фотографии
+            </TabsTrigger>
+            <TabsTrigger value="documents" className="text-white data-[state=active]:bg-white/20">
+              Документы
             </TabsTrigger>
           </TabsList>
 
