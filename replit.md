@@ -130,6 +130,13 @@ Recent Changes:
   - Added responsive mobile menu with hamburger toggle
   - Enhanced CSS with floating header styles and backdrop blur effects
   - Improved navigation UX with scroll-based header transformations
+- June 16, 2025: Enhanced visual elements and admin functionality:
+  - Repositioned rocket closer to logo for better composition on 1920x1080
+  - Fixed exhaust flame positioning under rocket nozzle without distortion effects
+  - Enlarged date badge with highest z-index to appear over all elements
+  - Fixed white button visibility issues with proper text colors
+  - Implemented full program management in admin panel with CRUD operations
+  - Added inline editing, highlighting, and deletion for program items
 
 ## User Preferences
 

@@ -57,6 +57,43 @@ export default function AdminPage() {
     reg.email?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Program management functions
+  const addProgramItem = () => {
+    if (!newItem.time || !newItem.title) {
+      toast({
+        title: "Ошибка",
+        description: "Заполните время и название события",
+        variant: "destructive",
+      });
+      return;
+    }
+    setProgramItems([...programItems, newItem]);
+    setNewItem({ time: "", title: "", isHighlight: false });
+    toast({
+      title: "Событие добавлено",
+      description: "Новое событие программы успешно добавлено",
+    });
+  };
+
+  const updateProgramItem = (index: number, updatedItem: any) => {
+    const newItems = [...programItems];
+    newItems[index] = updatedItem;
+    setProgramItems(newItems);
+    setEditingIndex(null);
+    toast({
+      title: "Событие обновлено",
+      description: "Изменения сохранены",
+    });
+  };
+
+  const deleteProgramItem = (index: number) => {
+    setProgramItems(programItems.filter((_, i) => i !== index));
+    toast({
+      title: "Событие удалено",
+      description: "Событие программы удалено",
+    });
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--space-navy)' }}>
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -211,16 +248,156 @@ export default function AdminPage() {
           </TabsContent>
 
           <TabsContent value="program" className="space-y-6">
+            {/* Add New Program Item */}
             <Card className="bg-white/10 border-white/20">
               <CardHeader>
-                <CardTitle className="text-white">Управление программой</CardTitle>
+                <CardTitle className="text-white">Добавить событие</CardTitle>
                 <CardDescription className="text-gray-400">
-                  Редактирование расписания мероприятия
+                  Создание нового пункта программы
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <Input
+                    placeholder="Время (например: 20:30)"
+                    value={newItem.time}
+                    onChange={(e) => setNewItem({...newItem, time: e.target.value})}
+                    className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                  />
+                  <Input
+                    placeholder="Название события"
+                    value={newItem.title}
+                    onChange={(e) => setNewItem({...newItem, title: e.target.value})}
+                    className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                  />
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      checked={newItem.isHighlight}
+                      onCheckedChange={(checked) => setNewItem({...newItem, isHighlight: !!checked})}
+                      className="data-[state=checked]:bg-cyan-400 data-[state=checked]:border-cyan-400"
+                    />
+                    <label className="text-white text-sm">Важное событие</label>
+                  </div>
+                </div>
+                <Button 
+                  onClick={addProgramItem}
+                  className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:scale-105 transform transition-all duration-300"
+                >
+                  Добавить событие
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Current Program Items */}
+            <Card className="bg-white/10 border-white/20">
+              <CardHeader>
+                <CardTitle className="text-white">Текущая программа ({programItems.length} событий)</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Редактирование и управление событиями программы
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8 text-gray-400">
-                  Функционал редактирования программы будет добавлен в следующих обновлениях
+                <div className="space-y-4 max-h-96 overflow-y-auto">
+                  {programItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`p-4 rounded-lg border ${
+                        item.isHighlight 
+                          ? 'bg-gradient-to-r from-red-600/20 to-orange-600/20 border-red-400/30' 
+                          : 'bg-white/5 border-white/10'
+                      }`}
+                    >
+                      {editingIndex === index ? (
+                        <div className="space-y-4">
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <Input
+                              value={item.time}
+                              onChange={(e) => {
+                                const newItems = [...programItems];
+                                newItems[index] = {...item, time: e.target.value};
+                                setProgramItems(newItems);
+                              }}
+                              className="bg-white/10 border-white/20 text-white"
+                            />
+                            <Input
+                              value={item.title}
+                              onChange={(e) => {
+                                const newItems = [...programItems];
+                                newItems[index] = {...item, title: e.target.value};
+                                setProgramItems(newItems);
+                              }}
+                              className="bg-white/10 border-white/20 text-white"
+                            />
+                            <div className="flex items-center space-x-2">
+                              <Checkbox
+                                checked={item.isHighlight}
+                                onCheckedChange={(checked) => {
+                                  const newItems = [...programItems];
+                                  newItems[index] = {...item, isHighlight: !!checked};
+                                  setProgramItems(newItems);
+                                }}
+                                className="data-[state=checked]:bg-cyan-400 data-[state=checked]:border-cyan-400"
+                              />
+                              <label className="text-white text-sm">Важное</label>
+                            </div>
+                          </div>
+                          <div className="flex gap-2">
+                            <Button 
+                              size="sm"
+                              onClick={() => updateProgramItem(index, item)}
+                              className="bg-green-600 hover:bg-green-700 text-white"
+                            >
+                              Сохранить
+                            </Button>
+                            <Button 
+                              size="sm"
+                              variant="outline"
+                              onClick={() => setEditingIndex(null)}
+                              className="text-white border-white/30 hover:bg-white/10 bg-transparent"
+                            >
+                              Отмена
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-4">
+                              <div className={`text-lg font-bold min-w-[120px] ${
+                                item.isHighlight ? 'text-white' : 'text-cyan-400'
+                              }`}>
+                                {item.time}
+                              </div>
+                              <div className="text-white font-medium flex-1">
+                                {item.title}
+                              </div>
+                              {item.isHighlight && (
+                                <Badge className="bg-red-500 text-white">Важное</Badge>
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex gap-2 ml-4">
+                            <Button 
+                              size="sm"
+                              variant="outline"
+                              onClick={() => setEditingIndex(index)}
+                              className="text-white border-white/30 hover:bg-white/10 bg-transparent"
+                            >
+                              Изменить
+                            </Button>
+                            <Button 
+                              size="sm"
+                              variant="outline"
+                              onClick={() => deleteProgramItem(index)}
+                              className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
+                            >
+                              Удалить
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
@@ -247,7 +424,7 @@ export default function AdminPage() {
           <Button 
             variant="outline" 
             onClick={() => window.location.href = '/'}
-            className="text-white border-white/30 hover:bg-white/10"
+            className="text-white border-white/30 hover:bg-white/10 hover:text-white bg-transparent"
           >
             Вернуться на главную
           </Button>
