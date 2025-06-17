@@ -203,7 +203,7 @@ export default function NewRegistrationSection() {
                   setShowForm(false);
                   setSelectedDistance("");
                 }}
-                className="text-white border-white/30 hover:bg-white/10"
+                className="text-white border-white/30 hover:bg-white/10 hover:text-white bg-transparent"
               >
                 Изменить дистанцию
               </Button>

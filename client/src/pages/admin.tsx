@@ -6,11 +6,29 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
+const initialProgramItems = [
+  { time: "17:00", title: "Открытие стартово-финишного городка", isHighlight: false },
+  { time: "17:00–20:00", title: "Выдача стартовых пакетов", isHighlight: true },
+  { time: "20:05", title: "Разминка для участников детского забега Фан-ран на 500 м", isHighlight: false },
+  { time: "20:15", title: "Старт детского забега Фан-ран на 500 м", isHighlight: true },
+  { time: "20:30–20:50", title: "Активная программа на сцене", isHighlight: false },
+  { time: "20:50", title: "Торжественное открытие «Ночной забег со звёздами» г. Королёв", isHighlight: true },
+  { time: "21:05", title: "Разминка для участников забега на дистанции 5 и 10 км", isHighlight: false },
+  { time: "21:20", title: "Старт забегов на дистанции 5 км и 10 км", isHighlight: true },
+  { time: "22:10", title: "Награждение победителей и призеров 5 км в абсолютном зачете", isHighlight: false },
+  { time: "22:30", title: "Награждение победителей и призеров 10 км в абсолютном зачете", isHighlight: true },
+  { time: "22:50", title: "Окончание бегового события (финиш последних участников)", isHighlight: false },
+];
+
 export default function AdminPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [programItems, setProgramItems] = useState(initialProgramItems);
+  const [newItem, setNewItem] = useState({ time: "", title: "", isHighlight: false });
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
