@@ -225,34 +225,14 @@ export default function HeroSection() {
             }}
           />
           
-          {/* Rocket Exhaust Trail Under Nozzle */}
-          <motion.div
-            className="absolute top-full left-1/2 transform -translate-x-1/2 z-5"
-            animate={{
-              opacity: [0.8, 1, 0.8],
-              y: [0, 15, 0],
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            {/* Main exhaust trail positioned directly under rocket nozzle */}
-            <motion.img 
+          {/* Rocket Exhaust Trail Under Nozzle - Clean and Simple */}
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 z-5">
+            <img 
               src={sparksImg} 
               alt="Exhaust" 
               className="w-80 h-96 md:w-96 md:h-[32rem]"
-              animate={{
-                opacity: [0.8, 1, 0.8],
-              }}
-              transition={{
-                duration: 1.8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
             />
-          </motion.div>
+          </div>
         </div>
       </motion.div>
       {/* Large Decorative Stars */}
