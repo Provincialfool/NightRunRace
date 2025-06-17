@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
-import gubernatorLogo from "@assets/Gubernator.png";
-import mosoblsportLogo from "@assets/MOSOBLSPORT.png";
-import korolevLogo from "@assets/KOROLEV.png";
+import { Building2, Trophy, MapPin } from "lucide-react";
 
 const partners = [
-  { name: "Команда Губернатора", logo: gubernatorLogo, key: "gubernator" },
-  { name: "Мособл спорт", logo: mosoblsportLogo, key: "mosoblsport" },
-  { name: "Администрация г.о. Королёв", logo: korolevLogo, key: "korolev" },
+  { name: "Команда Губернатора", icon: Building2, key: "gubernator" },
+  { name: "Мособл спорт", icon: Trophy, key: "mosoblsport" },
+  { name: "Администрация г.о. Королёв", icon: MapPin, key: "korolev" },
 ];
 
 export default function PartnersSection() {
@@ -37,11 +35,7 @@ export default function PartnersSection() {
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
             >
-              <img
-                src={partner.logo}
-                alt={partner.name}
-                className="h-20 w-auto mx-auto mb-4 object-contain"
-              />
+              <partner.icon className="h-16 w-16 mx-auto mb-4 text-cyan-400" />
               <h3 className="text-white font-semibold">{partner.name}</h3>
             </motion.div>
           ))}

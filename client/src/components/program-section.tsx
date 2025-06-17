@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import rocketImg from "@assets/rocket.png";
+import { Rocket } from "lucide-react";
 
 const programItems = [
   { time: "17:00", title: "Открытие стартово-финишного городка", isHighlight: false },
@@ -27,7 +27,7 @@ export default function ProgramSection() {
           viewport={{ once: true }}
         >
           <h2 className="text-5xl font-bold gradient-text mb-6 flex items-center justify-center gap-4">
-            <img src={rocketImg} alt="Rocket" className="w-12 h-12" />
+            <Rocket className="w-12 h-12 text-cyan-400" />
             ПРОГРАММА
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
