@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
-import rocketImg from "@assets/rocket.png";
-import sparksImg from "@assets/Sparks.png";
-import starImg from "@assets/star.png";
-import dateBadge from "@assets/date.png";
-import logoBig from "@assets/logo-big.png";
+
+// SVG изображения встроены для независимости от внешних файлов
+const rocketImg = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3cpath d='M50 10 L60 40 L50 90 L40 40 Z' fill='%23ff6b6b'/%3e%3c/svg%3e";
+const sparksImg = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3e%3ccircle cx='25' cy='25' r='20' fill='%23ffd93d'/%3e%3c/svg%3e";
+const starImg = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' fill='%23fff'/%3e%3c/svg%3e";
+const dateBadge = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3e%3crect width='200' height='80' rx='40' fill='%2306b6d4'/%3e%3ctext x='100' y='50' text-anchor='middle' fill='white' font-size='20'%3e28 ИЮНЯ%3c/text%3e%3c/svg%3e";
+const logoBig = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 120'%3e%3ctext x='150' y='70' text-anchor='middle' fill='%23fff' font-size='24' font-weight='bold'%3eNIGHT RUN KOROLEV%3c/text%3e%3c/svg%3e";
 
 export default function HeroSection() {
   return (
