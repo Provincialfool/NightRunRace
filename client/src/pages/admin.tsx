@@ -376,14 +376,38 @@ export default function AdminPage() {
                             {registration.club && <div>Клуб: {registration.club}</div>}
                           </div>
                         </div>
-                        <div className="text-xs text-gray-500">
-                          {new Date(registration.createdAt).toLocaleDateString('ru-RU', {
-                            day: '2-digit',
-                            month: '2-digit',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
+                        <div className="flex flex-col items-end gap-2">
+                          <div className="text-xs text-gray-500">
+                            {new Date(registration.createdAt).toLocaleDateString('ru-RU', {
+                              day: '2-digit',
+                              month: '2-digit',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}
+                          </div>
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => setEditingRegistration(registration)}
+                              className="text-white border-white/30 hover:bg-white/10 bg-transparent"
+                            >
+                              Изменить
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => {
+                                if (confirm(`Удалить регистрацию ${registration.firstName} ${registration.lastName}?`)) {
+                                  deleteRegistrationMutation.mutate(registration.id);
+                                }
+                              }}
+                              className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
+                            >
+                              Удалить
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -391,6 +415,113 @@ export default function AdminPage() {
                 )}
               </CardContent>
             </Card>
+
+            {/* Registration Edit Modal */}
+            {editingRegistration && (
+              <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                <Card className="bg-white/10 border-white/20 w-full max-w-md max-h-[80vh] overflow-y-auto">
+                  <CardHeader>
+                    <CardTitle className="text-white">Редактировать участника</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-white block mb-2">Имя</label>
+                        <Input
+                          value={editingRegistration.firstName}
+                          onChange={(e) => setEditingRegistration({...editingRegistration, firstName: e.target.value})}
+                          className="bg-white/10 border-white/20 text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-white block mb-2">Фамилия</label>
+                        <Input
+                          value={editingRegistration.lastName}
+                          onChange={(e) => setEditingRegistration({...editingRegistration, lastName: e.target.value})}
+                          className="bg-white/10 border-white/20 text-white"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-white block mb-2">Email</label>
+                      <Input
+                        value={editingRegistration.email}
+                        onChange={(e) => setEditingRegistration({...editingRegistration, email: e.target.value})}
+                        className="bg-white/10 border-white/20 text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-white block mb-2">Телефон</label>
+                      <Input
+                        value={editingRegistration.phone}
+                        onChange={(e) => setEditingRegistration({...editingRegistration, phone: e.target.value})}
+                        className="bg-white/10 border-white/20 text-white"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-white block mb-2">Город</label>
+                        <Input
+                          value={editingRegistration.city}
+                          onChange={(e) => setEditingRegistration({...editingRegistration, city: e.target.value})}
+                          className="bg-white/10 border-white/20 text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-white block mb-2">Страна</label>
+                        <Input
+                          value={editingRegistration.country}
+                          onChange={(e) => setEditingRegistration({...editingRegistration, country: e.target.value})}
+                          className="bg-white/10 border-white/20 text-white"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-white block mb-2">Дистанция</label>
+                      <Select 
+                        value={editingRegistration.distance} 
+                        onValueChange={(value) => setEditingRegistration({...editingRegistration, distance: value})}
+                      >
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="5km">5 км</SelectItem>
+                          <SelectItem value="10km">10 км</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <label className="text-white block mb-2">Клуб (опционально)</label>
+                      <Input
+                        value={editingRegistration.club || ""}
+                        onChange={(e) => setEditingRegistration({...editingRegistration, club: e.target.value})}
+                        className="bg-white/10 border-white/20 text-white"
+                      />
+                    </div>
+                    <div className="flex gap-2 pt-4">
+                      <Button
+                        onClick={() => updateRegistrationMutation.mutate({ 
+                          id: editingRegistration.id, 
+                          data: editingRegistration 
+                        })}
+                        disabled={updateRegistrationMutation.isPending}
+                        className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                      >
+                        {updateRegistrationMutation.isPending ? "Сохранение..." : "Сохранить"}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => setEditingRegistration(null)}
+                        className="flex-1 text-white border-white/30 hover:bg-white/10 bg-transparent"
+                      >
+                        Отмена
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="program" className="space-y-6">
@@ -557,9 +688,160 @@ export default function AdminPage() {
                   Загрузка и управление фотографиями с мероприятия
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="text-center py-8 text-gray-400">
-                  Фотографии будут доступны для загрузки после проведения мероприятия 28 июня 2025
+              <CardContent className="space-y-6">
+                {/* Photo Upload Form */}
+                <div className="border border-white/20 rounded-lg p-6 bg-white/5">
+                  <h3 className="text-white font-semibold mb-4">Загрузить новое фото</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-white block mb-2">Выберите фото</label>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setPhotoFile(e.target.files?.[0] || null)}
+                        className="bg-white/10 border-white/20 text-white file:bg-cyan-500 file:text-white file:border-0 file:rounded file:px-4 file:py-2"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-white block mb-2">Описание фото</label>
+                      <Textarea
+                        value={photoCaption}
+                        onChange={(e) => setPhotoCaption(e.target.value)}
+                        placeholder="Введите описание..."
+                        className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                      />
+                    </div>
+                    <Button
+                      onClick={() => uploadPhotoMutation.mutate()}
+                      disabled={!photoFile || uploadPhotoMutation.isPending}
+                      className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:scale-105 transform transition-all duration-300"
+                    >
+                      {uploadPhotoMutation.isPending ? "Загрузка..." : "Загрузить фото"}
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Photos Gallery */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {photos.map((photo: any) => (
+                    <Card key={photo.id} className="bg-white/10 border-white/20">
+                      <CardContent className="p-4">
+                        <img
+                          src={`/uploads/${photo.filename}`}
+                          alt={photo.caption}
+                          className="w-full h-48 object-cover rounded-lg mb-3"
+                        />
+                        <p className="text-white text-sm mb-2">{photo.caption}</p>
+                        <p className="text-gray-400 text-xs mb-3">
+                          Загружено: {new Date(photo.createdAt).toLocaleDateString('ru-RU')}
+                        </p>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            // Delete photo mutation
+                            fetch(`/api/photos/${photo.id}`, { method: 'DELETE' })
+                              .then(() => queryClient.invalidateQueries({ queryKey: ["/api/photos"] }));
+                          }}
+                          className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
+                        >
+                          Удалить
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="documents" className="space-y-6">
+            <Card className="bg-white/10 border-white/20">
+              <CardHeader>
+                <CardTitle className="text-white">Управление документами</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Загрузка карт маршрутов, регламентов и других документов
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Document Upload Form */}
+                <div className="border border-white/20 rounded-lg p-6 bg-white/5">
+                  <h3 className="text-white font-semibold mb-4">Загрузить новый документ</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-white block mb-2">Выберите файл</label>
+                      <Input
+                        type="file"
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                        onChange={(e) => setDocumentFile(e.target.files?.[0] || null)}
+                        className="bg-white/10 border-white/20 text-white file:bg-cyan-500 file:text-white file:border-0 file:rounded file:px-4 file:py-2"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-white block mb-2">Тип документа</label>
+                      <Select value={documentType} onValueChange={setDocumentType}>
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                          <SelectValue placeholder="Выберите тип документа" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="route_5km">Карта маршрута 5км</SelectItem>
+                          <SelectItem value="route_10km">Карта маршрута 10км</SelectItem>
+                          <SelectItem value="regulations">Регламент соревнований</SelectItem>
+                          <SelectItem value="start_protocol">Стартовый протокол</SelectItem>
+                          <SelectItem value="results">Результаты</SelectItem>
+                          <SelectItem value="other">Другое</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <Button
+                      onClick={() => uploadDocumentMutation.mutate()}
+                      disabled={!documentFile || !documentType || uploadDocumentMutation.isPending}
+                      className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:scale-105 transform transition-all duration-300"
+                    >
+                      {uploadDocumentMutation.isPending ? "Загрузка..." : "Загрузить документ"}
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Documents List */}
+                <div className="space-y-3">
+                  {documents.map((document: any) => (
+                    <Card key={document.id} className="bg-white/10 border-white/20">
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <h3 className="text-white font-semibold">{document.type}</h3>
+                            <p className="text-gray-400 text-sm">{document.filename}</p>
+                            <p className="text-gray-400 text-xs">
+                              Загружено: {new Date(document.createdAt).toLocaleDateString('ru-RU')}
+                            </p>
+                          </div>
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => window.open(`/uploads/${document.filename}`, '_blank')}
+                              className="text-white border-white/30 hover:bg-white/10 bg-transparent"
+                            >
+                              Скачать
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                // Delete document mutation
+                                fetch(`/api/documents/${document.id}`, { method: 'DELETE' })
+                                  .then(() => queryClient.invalidateQueries({ queryKey: ["/api/documents"] }));
+                              }}
+                              className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
+                            >
+                              Удалить
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </CardContent>
             </Card>

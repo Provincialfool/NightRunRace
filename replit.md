@@ -137,6 +137,15 @@ Recent Changes:
   - Fixed white button visibility issues with proper text colors
   - Implemented full program management in admin panel with CRUD operations
   - Added inline editing, highlighting, and deletion for program items
+- June 17, 2025: Comprehensive admin panel with authentication system:
+  - Created secure login system (/login) with hardcoded admin credentials (admin/nightrun2025)
+  - Built protected admin panel (/admin) with session-based authentication
+  - Implemented complete participant management with edit/delete functionality
+  - Added photo upload system with caption management and gallery display
+  - Created document management for race maps, regulations, and other files
+  - Integrated file upload capabilities with multer for photos and documents
+  - Added comprehensive statistics dashboard showing registration counts and availability
+  - Created tabbed interface for managing registrations, program, photos, and documents
 
 ## User Preferences
 
