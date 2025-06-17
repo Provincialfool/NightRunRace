@@ -227,11 +227,15 @@ export default function HeroSection() {
           
           {/* Rocket Exhaust Trail Under Nozzle - Clean and Simple */}
           <div className="absolute top-full left-1/2 transform -translate-x-1/2 z-5">
-            <img 
-              src={sparksImg} 
-              alt="Exhaust" 
-              className="w-80 h-96 md:w-96 md:h-[32rem]"
-            />
+            <img
+              src={sparksImg}
+              alt="Exhaust"
+              style={{ 
+                width: '320px', 
+                height: '384px',
+                maxWidth: 'none'
+              }}
+              className="ml-[-119px] mr-[-119px]" />
           </div>
         </div>
       </motion.div>
