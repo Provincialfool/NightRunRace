@@ -5,8 +5,9 @@ import NewRegistrationSection from "@/components/new-registration-section";
 import PhotoGallerySection from "@/components/photo-gallery-section";
 import ProgramSection from "@/components/program-section";
 import PartnersSection from "@/components/partners-section";
-import logoImg from "@assets/logo_1750094435561.png";
-import partnersImg from "@assets/partners_1750094435562.png";
+// Временные заглушки для изображений
+const logoImg = "/api/placeholder/200/80";
+const partnersImg = "/api/placeholder/800/200";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);

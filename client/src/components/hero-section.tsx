@@ -23,7 +23,12 @@ export default function HeroSection() {
           ease: "easeInOut",
         }}
       >
-        <img src={starImg} alt="Star" className="w-6 h-6 filter drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 8px rgba(0, 255, 255, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-6 h-6 filter drop-shadow-lg"
+          style={{ filter: "drop-shadow(0 0 8px rgba(0, 255, 255, 0.8))" }}
+        />
       </motion.div>
       <motion.div
         className="absolute top-[12%] right-[20%] z-5"
@@ -39,7 +44,12 @@ export default function HeroSection() {
           delay: 1,
         }}
       >
-        <img src={starImg} alt="Star" className="w-8 h-8" style={{ filter: 'drop-shadow(0 0 10px rgba(255, 0, 255, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-8 h-8"
+          style={{ filter: "drop-shadow(0 0 10px rgba(255, 0, 255, 0.8))" }}
+        />
       </motion.div>
       <motion.div
         className="absolute top-[18%] left-[5%] z-5"
@@ -55,7 +65,12 @@ export default function HeroSection() {
           delay: 2,
         }}
       >
-        <img src={starImg} alt="Star" className="w-4 h-4" style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 0, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-4 h-4"
+          style={{ filter: "drop-shadow(0 0 6px rgba(255, 255, 0, 0.8))" }}
+        />
       </motion.div>
       <motion.div
         className="absolute top-[25%] left-[30%] z-5"
@@ -71,7 +86,12 @@ export default function HeroSection() {
           delay: 0.5,
         }}
       >
-        <img src={starImg} alt="Star" className="w-5 h-5" style={{ filter: 'drop-shadow(0 0 8px rgba(0, 255, 100, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-5 h-5"
+          style={{ filter: "drop-shadow(0 0 8px rgba(0, 255, 100, 0.8))" }}
+        />
       </motion.div>
       {/* Middle area stars */}
       <motion.div
@@ -88,7 +108,12 @@ export default function HeroSection() {
           delay: 1.5,
         }}
       >
-        <img src={starImg} alt="Star" className="w-10 h-10" style={{ filter: 'drop-shadow(0 0 12px rgba(255, 100, 255, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-10 h-10"
+          style={{ filter: "drop-shadow(0 0 12px rgba(255, 100, 255, 0.8))" }}
+        />
       </motion.div>
       <motion.div
         className="absolute top-[45%] right-[25%] z-5"
@@ -104,7 +129,12 @@ export default function HeroSection() {
           delay: 2.5,
         }}
       >
-        <img src={starImg} alt="Star" className="w-7 h-7" style={{ filter: 'drop-shadow(0 0 10px rgba(100, 255, 255, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-7 h-7"
+          style={{ filter: "drop-shadow(0 0 10px rgba(100, 255, 255, 0.8))" }}
+        />
       </motion.div>
       {/* Bottom area stars */}
       <motion.div
@@ -121,7 +151,12 @@ export default function HeroSection() {
           delay: 3,
         }}
       >
-        <img src={starImg} alt="Star" className="w-6 h-6" style={{ filter: 'drop-shadow(0 0 8px rgba(255, 200, 0, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-6 h-6"
+          style={{ filter: "drop-shadow(0 0 8px rgba(255, 200, 0, 0.8))" }}
+        />
       </motion.div>
       <motion.div
         className="absolute top-[75%] right-[15%] z-5"
@@ -137,7 +172,12 @@ export default function HeroSection() {
           delay: 1.8,
         }}
       >
-        <img src={starImg} alt="Star" className="w-8 h-8" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 200, 255, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-8 h-8"
+          style={{ filter: "drop-shadow(0 0 10px rgba(0, 200, 255, 0.8))" }}
+        />
       </motion.div>
       <motion.div
         className="absolute top-[80%] left-[25%] z-5"
@@ -153,7 +193,12 @@ export default function HeroSection() {
           delay: 0.8,
         }}
       >
-        <img src={starImg} alt="Star" className="w-5 h-5" style={{ filter: 'drop-shadow(0 0 8px rgba(255, 0, 150, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-5 h-5"
+          style={{ filter: "drop-shadow(0 0 8px rgba(255, 0, 150, 0.8))" }}
+        />
       </motion.div>
       {/* Additional scattered stars */}
       <motion.div
@@ -170,7 +215,12 @@ export default function HeroSection() {
           delay: 4,
         }}
       >
-        <img src={starImg} alt="Star" className="w-4 h-4" style={{ filter: 'drop-shadow(0 0 6px rgba(150, 255, 0, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-4 h-4"
+          style={{ filter: "drop-shadow(0 0 6px rgba(150, 255, 0, 0.8))" }}
+        />
       </motion.div>
       <motion.div
         className="absolute top-[55%] left-[35%] z-5"
@@ -186,7 +236,12 @@ export default function HeroSection() {
           delay: 2.2,
         }}
       >
-        <img src={starImg} alt="Star" className="w-9 h-9" style={{ filter: 'drop-shadow(0 0 12px rgba(255, 150, 255, 0.8))' }} />
+        <img
+          src={starImg}
+          alt="Star"
+          className="w-9 h-9"
+          style={{ filter: "drop-shadow(0 0 12px rgba(255, 150, 255, 0.8))" }}
+        />
       </motion.div>
       {/* Large Animated Rocket with Massive Exhaust Trail */}
       <motion.div
@@ -204,19 +259,20 @@ export default function HeroSection() {
       >
         <div className="relative">
           {/* Main Rocket - Much Larger */}
-          <motion.img 
-            src={rocketImg} 
-            alt="Rocket" 
+          <motion.img
+            src={rocketImg}
+            alt="Rocket"
             className="w-56 h-72 md:w-72 md:h-96 relative z-20"
-            style={{ 
-              filter: 'drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 255, 0.4))',
+            style={{
+              filter:
+                "drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 255, 0.4))",
             }}
             animate={{
               filter: [
-                'drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 255, 0.4))',
-                'drop-shadow(0 0 30px rgba(255, 0, 255, 0.8)) drop-shadow(0 0 50px rgba(0, 255, 255, 0.6))',
-                'drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 255, 0.4))',
-              ]
+                "drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 255, 0.4))",
+                "drop-shadow(0 0 30px rgba(255, 0, 255, 0.8)) drop-shadow(0 0 50px rgba(0, 255, 255, 0.6))",
+                "drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 255, 0.4))",
+              ],
             }}
             transition={{
               duration: 3,
@@ -224,16 +280,16 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           />
-          
+
           {/* Rocket Exhaust Trail Under Nozzle - Positioned slightly left */}
           <div className="absolute top-full left-1/2 transform -translate-x-1/2 -translate-x-5 z-5">
             <img
               src={sparksImg}
               alt="Exhaust"
-              style={{ 
-                width: '180px', 
-                height: '250px',
-                maxWidth: 'none'
+              style={{
+                width: "auto",
+                height: "auto",
+                maxWidth: "none",
               }}
             />
           </div>
@@ -264,19 +320,20 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1 }}
           >
-            <motion.img 
-              src={logoBig} 
-              alt="Ночной забег Королёв" 
+            <motion.img
+              src={logoBig}
+              alt="Ночной забег Королёв"
               className="mx-auto w-96 h-auto md:w-[32rem] max-w-full ml-[0px] mr-[0px]"
-              style={{ 
-                filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 60px rgba(255, 0, 255, 0.4)) drop-shadow(0 0 90px rgba(255, 255, 255, 0.2))',
+              style={{
+                filter:
+                  "drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 60px rgba(255, 0, 255, 0.4)) drop-shadow(0 0 90px rgba(255, 255, 255, 0.2))",
               }}
               animate={{
                 filter: [
-                  'drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 60px rgba(255, 0, 255, 0.4)) drop-shadow(0 0 90px rgba(255, 255, 255, 0.2))',
-                  'drop-shadow(0 0 40px rgba(255, 0, 255, 0.8)) drop-shadow(0 0 80px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 120px rgba(255, 255, 255, 0.3))',
-                  'drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 60px rgba(255, 0, 255, 0.4)) drop-shadow(0 0 90px rgba(255, 255, 255, 0.2))',
-                ]
+                  "drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 60px rgba(255, 0, 255, 0.4)) drop-shadow(0 0 90px rgba(255, 255, 255, 0.2))",
+                  "drop-shadow(0 0 40px rgba(255, 0, 255, 0.8)) drop-shadow(0 0 80px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 120px rgba(255, 255, 255, 0.3))",
+                  "drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 60px rgba(255, 0, 255, 0.4)) drop-shadow(0 0 90px rgba(255, 255, 255, 0.2))",
+                ],
               }}
               transition={{
                 duration: 4,
@@ -294,7 +351,11 @@ export default function HeroSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <img src={dateBadge} alt="28.06.2025" className="h-24 w-auto mx-auto md:h-32" />
+          <img
+            src={dateBadge}
+            alt="28.06.2025"
+            className="h-24 w-auto mx-auto md:h-32"
+          />
         </motion.div>
 
         <motion.p
@@ -303,7 +364,8 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          Присоединяйтесь к космическому забегу под звёздным небом! Выберите свою дистанцию и станьте частью незабываемого приключения.
+          Присоединяйтесь к космическому забегу под звёздным небом! Выберите
+          свою дистанцию и станьте частью незабываемого приключения.
         </motion.p>
 
         <motion.div
